@@ -12,7 +12,7 @@ export default function Cart({ isAuth, setIsAuth }) {
     if (isAuth) {
       navigate("/checkout");
     } else {
-      setLoggedMessage("You are not logged in");
+      setLoggedMessage("YOU ARE NOT LOGGED IN");
     }
   };
 
@@ -46,7 +46,7 @@ export default function Cart({ isAuth, setIsAuth }) {
             </div>
             <Link
               to="/product"
-              className="mt-10 animate-pulse-scale bg-green-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg transition duration-300 ease-in-out"
+              className="mt-10 animate-pulse-scale bg-green-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg transition duration-300 ease-in-out font-bold"
               onClick={onCheckout}
             >
               Return to Products
@@ -100,7 +100,7 @@ export default function Cart({ isAuth, setIsAuth }) {
                 Clear Cart
               </button>
               <button
-                className="animate-pulse-scale bg-green-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg transition duration-300 ease-in-out"
+                className="animate-pulse-scale bg-green-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg transition duration-300 ease-in-out font-bold"
                 onClick={onCheckout}
               >
                 Checkout

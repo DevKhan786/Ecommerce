@@ -60,14 +60,14 @@ export default function Product() {
         {totalItems > 0 ? (
           <div className="flex justify-center items-center">
             <button
-              className="px-8 py-2 bg-red-500 rounded-lg mt-10 flex items-center justify-center font-bold hover:bg-red-600 mr-5"
+              className="text-white px-8 py-2 bg-red-500 rounded-lg mt-10 flex items-center justify-center  hover:bg-red-600 mr-5"
               onClick={clearCart}
             >
               Clear Cart
             </button>
             <Link
               to="/cart"
-              className="px-8 py-2 bg-green-500 rounded-lg mt-10 flex items-center justify-center font-bold hover:bg-green-600 animate-pulse-scale"
+              className="text-white px-8 py-2 bg-green-500 rounded-lg mt-10 flex items-center justify-center font-bold hover:bg-green-600 animate-pulse-scale"
             >
               Go to Cart
             </Link>
@@ -75,7 +75,7 @@ export default function Product() {
         ) : (
           <Link
             to="/"
-            className="px-8 py-2 bg-red-500 rounded-lg mt-10 flex items-center justify-center font-bold hover:bg-red-600 animate-pulse-scale "
+            className="text-white px-8 py-2 bg-red-500 rounded-lg mt-10 flex items-center justify-center  hover:bg-red-600 animate-pulse-scale "
           >
             Return to Hamazon
           </Link>
