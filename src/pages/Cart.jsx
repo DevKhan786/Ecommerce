@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { ProductList } from "../components/ProductList";
 import { ShopContext } from "../context/Shopcontext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Cart({ isAuth, setIsAuth }) {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ export default function Cart({ isAuth, setIsAuth }) {
         </h1>
 
         {totalItems === 0 ? (
-          <div className="flex justify-center items-center min-h-[calc(100vh-400px)]">
+          <div className="flex justify-center items-center min-h-[calc(100vh-400px)] flex-col">
             <div className="bg-white p-8 max-w-lg w-full text-center rounded-3xl shadow-xl border-2 border-dashed border-gray-300">
               <p className="text-2xl font-semibold text-gray-800">
                 Your Hamazon cart is empty!
@@ -43,6 +44,13 @@ export default function Cart({ isAuth, setIsAuth }) {
                 Add some products to your cart and they will appear here.
               </p>
             </div>
+            <Link
+              to="/product"
+              className="mt-10 animate-pulse-scale bg-green-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg transition duration-300 ease-in-out"
+              onClick={onCheckout}
+            >
+              Return to Products
+            </Link>
           </div>
         ) : (
           <>
@@ -92,7 +100,7 @@ export default function Cart({ isAuth, setIsAuth }) {
                 Clear Cart
               </button>
               <button
-                className="bg-green-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg transition duration-300 ease-in-out"
+                className="animate-pulse-scale bg-green-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg transition duration-300 ease-in-out"
                 onClick={onCheckout}
               >
                 Checkout

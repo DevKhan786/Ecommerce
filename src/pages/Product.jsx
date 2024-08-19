@@ -1,13 +1,20 @@
 import React, { useContext } from "react";
 import { ProductList } from "../components/ProductList";
 import { ShopContext } from "../context/Shopcontext";
+import { Link } from "react-router-dom";
 
 export default function Product() {
   const { cartItems, addToCart, removeFromCart, clearCart } =
     useContext(ShopContext);
+
+  const totalItems = Object.values(cartItems).reduce(
+    (sum, quantity) => sum + quantity,
+    0
+  );
+
   return (
-    <div className="bg-gray-100 min-h-screen py-8">
-      <div className="container mx-auto px-4">
+    <div className="bg-gray-100 min-h-[calc(100vh-152px)] py-8">
+      <div className="container mx-auto px-4 flex flex-col items-center justify-center">
         <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-12">
           Explore Our Products
         </h1>
@@ -50,6 +57,22 @@ export default function Product() {
             </div>
           ))}
         </div>
+        {totalItems > 0 && (
+          <div className="flex justify-center items-center">
+            <button
+              className="px-8 py-2 bg-red-500 rounded-lg mt-10 flex items-center justify-center font-bold hover:bg-red-600 mr-5"
+              onClick={clearCart}
+            >
+              Clear Cart
+            </button>
+            <Link
+              to="/cart"
+              className="px-8 py-2 bg-green-500 rounded-lg mt-10 flex items-center justify-center font-bold hover:bg-green-600 animate-pulse-scale"
+            >
+              Go to Cart
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
