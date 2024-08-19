@@ -26,7 +26,10 @@ export default function Navbar({
     <nav className="bg-gray-900 p-4 shadow-md">
       <div className="w-full flex justify-between items-center px-4">
         <div className="text-white font-semibold text-xl">
-          <Link to="/" className="hover:text-gray-300">
+          <Link
+            to="/"
+            className="text-white hover:text-orange-500 duration-200 ease-in-out"
+          >
             Hamazon
           </Link>
         </div>
@@ -49,27 +52,27 @@ export default function Navbar({
           {!isAuth ? (
             <Link
               to="/login"
-              className="text-white hover:text-gray-300 transition duration-300 ease-in-out"
+              className="text-white hover:text-orange-500 duration-200 ease-in-out"
             >
               Login
             </Link>
           ) : (
             <Link
               to="/profile"
-              className="text-white hover:text-gray-300 transition duration-300 ease-in-out"
+              className="text-white hover:text-orange-500 duration-200 ease-in-out"
             >
               Profile
             </Link>
           )}
           <Link
             to="/product"
-            className="text-white hover:text-gray-300 transition duration-300 ease-in-out"
+            className="text-white hover:text-orange-500 duration-200 ease-in-out"
           >
             Products
           </Link>
           <Link
             to="/cart"
-            className="text-white flex items-center hover:text-gray-300 transition duration-300 ease-in-out"
+            className="text-white hover:text-orange-500 duration-200 ease-in-out"
           >
             Cart
             <span className="ml-2 bg-red-500 text-white px-2 py-1 text-xs rounded-full">
