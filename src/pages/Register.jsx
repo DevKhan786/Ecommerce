@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { auth } from "../firebase-cfg";
+import { auth, db } from "../firebase-cfg";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 export default function Register({ isAuth, setIsAuth }) {
@@ -20,7 +21,21 @@ export default function Register({ isAuth, setIsAuth }) {
       return;
     } else {
       try {
-        await createUserWithEmailAndPassword(auth, emailValue, passwordValue);
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          emailValue,
+          passwordValue
+        );
+        const user = userCredential.user;
+        console.log(user);
+        await setDoc(doc(db, "users", user.uid), {
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          createdAt: new Date(),
+          uid: user.uid,
+        });
+
         console.log("User registered and logged in successfully");
         navigate("/");
         setIsAuth(true);

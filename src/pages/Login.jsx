@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { auth, provider } from "../firebase-cfg";
+import { auth, provider, db } from "../firebase-cfg";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import Register from "./Register";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export default function Login({ isAuth, setIsAuth }) {
   const navigate = useNavigate();
@@ -17,10 +17,26 @@ export default function Login({ isAuth, setIsAuth }) {
 
   const googleLogin = async () => {
     try {
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (!userDoc.exists()) {
+        await setDoc(userDocRef, {
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          createdAt: new Date(),
+          uid: user.uid,
+        });
+        console.log("New user document created in Firestore");
+      }
+
       console.log("User logged in successfully");
-      navigate("/");
       setIsAuth(true);
+      navigate("/");
     } catch (error) {
       console.error("Login error: ", error);
     }
@@ -34,8 +50,8 @@ export default function Login({ isAuth, setIsAuth }) {
       try {
         await signInWithEmailAndPassword(auth, emailValue, passwordValue);
         console.log("User logged in successfully");
-        navigate("/");
         setIsAuth(true);
+        navigate("/");
       } catch (error) {
         if (error.code === "auth/wrong-password") {
           alert("Incorrect password. Please try again.");

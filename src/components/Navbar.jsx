@@ -1,9 +1,21 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ShopContext } from "../context/Shopcontext";
+import { useNavigate } from "react-router-dom";
 
-export default function Navbar({ isAuth, setIsAuth }) {
+export default function Navbar({
+  isAuth,
+  setIsAuth,
+  searchValue,
+  setSearchValue,
+}) {
+  const navigate = useNavigate();
   const { cartItems } = useContext(ShopContext);
+
+  const handleClick = () => {
+    if (!searchValue.trim()) return;
+    navigate("/search");
+  };
 
   const totalItems = Object.values(cartItems).reduce(
     (sum, quantity) => sum + quantity,
@@ -23,8 +35,13 @@ export default function Navbar({ isAuth, setIsAuth }) {
             type="text"
             placeholder="Search Here..."
             className="w-full p-2 pl-4 rounded-l-lg border-none bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:border-gray-500 focus:ring-2 focus:ring-gray-500 transition duration-300 ease-in-out"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
           />
-          <button className="p-2 bg-orange-500 text-white rounded-r-lg border-none hover:bg-orange-600 transition duration-300 ease-in-out">
+          <button
+            onClick={handleClick}
+            className="p-2 bg-orange-500 text-white rounded-r-lg border-none hover:bg-orange-600 transition duration-300 ease-in-out"
+          >
             Search
           </button>
         </div>
@@ -48,7 +65,7 @@ export default function Navbar({ isAuth, setIsAuth }) {
             to="/product"
             className="text-white hover:text-gray-300 transition duration-300 ease-in-out"
           >
-            Product
+            Products
           </Link>
           <Link
             to="/cart"

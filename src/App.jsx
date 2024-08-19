@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Checkout from "./pages/Checkout";
+import Search from "./pages/Search";
 import { auth, provider } from "./firebase-cfg";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -21,6 +22,7 @@ import { ShopContextProvider } from "./context/Shopcontext";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -37,11 +39,27 @@ function App() {
   return (
     <ShopContextProvider>
       <Router>
-        <Navbar isAuth={isAuth} setIsAuth={setIsAuth} />
+        <Navbar
+          isAuth={isAuth}
+          setIsAuth={setIsAuth}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
         <Routes>
           <Route
             path="/"
             element={<Home isAuth={isAuth} setIsAuth={setIsAuth} />}
+          />
+          <Route
+            path="/search"
+            element={
+              <Search
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                isAuth={isAuth}
+                setIsAuth={setIsAuth}
+              />
+            }
           />
           <Route
             path="/login"
