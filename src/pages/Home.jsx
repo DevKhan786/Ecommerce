@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <section className="bg-blue-500 text-white min-h-[calc(100vh-60px)] flex flex-col justify-center items-center text-center">

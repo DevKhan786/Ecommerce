@@ -57,7 +57,7 @@ export default function Product() {
             </div>
           ))}
         </div>
-        {totalItems > 0 && (
+        {totalItems > 0 ? (
           <div className="flex justify-center items-center">
             <button
               className="px-8 py-2 bg-red-500 rounded-lg mt-10 flex items-center justify-center font-bold hover:bg-red-600 mr-5"
@@ -72,6 +72,13 @@ export default function Product() {
               Go to Cart
             </Link>
           </div>
+        ) : (
+          <Link
+            to="/"
+            className="px-8 py-2 bg-red-500 rounded-lg mt-10 flex items-center justify-center font-bold hover:bg-red-600 animate-pulse-scale "
+          >
+            Return to Hamazon
+          </Link>
         )}
       </div>
     </div>
