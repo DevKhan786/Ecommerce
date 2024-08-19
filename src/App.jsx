@@ -12,6 +12,7 @@ import Product from "./pages/Product";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
+import Checkout from "./pages/Checkout";
 import { auth, provider } from "./firebase-cfg";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -61,6 +62,10 @@ function App() {
           <Route
             path="/profile"
             element={<Profile isAuth={isAuth} setIsAuth={setIsAuth} />}
+          />
+          <Route
+            path="/checkout"
+            element={<Checkout isAuth={isAuth} setIsAuth={setIsAuth} />}
           />
         </Routes>
       </Router>
